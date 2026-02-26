@@ -1,42 +1,39 @@
 ---
 name: consensus-guard-core
-description: Open-source Consensus.Tools skill for governed AI decisions with board-native artifacts, strict JSON contracts, and deterministic policy behavior.
+description: Shared deterministic guard primitives for the Consensus.Tools skill family: hard-block taxonomy, weighted vote aggregation, reputation updates, idempotency keys, strict schema enforcement, and indexed board artifact access.
 homepage: https://github.com/kaicianflone/consensus-guard-core
 source: https://github.com/kaicianflone/consensus-guard-core
 ---
 
 # consensus-guard-core
 
-This skill is part of the Consensus.Tools ecosystem and is designed for production-grade agent governance.
+`consensus-guard-core` is the common policy engine behind the Consensus guard ecosystem.
 
-## Why this skill exists
+## What this skill/package provides
 
-Most agent systems fail because a single model decides and executes without explicit arbitration. This skill addresses that by applying consensus-style controls:
+- unified hard-block taxonomy
+- deterministic `aggregateVotes()` policy function
+- deterministic reputation update rules with clamping
+- idempotency key generation for retry-safe execution
+- strict-schema unknown-field rejection helpers
+- indexed board read helpers for scalable artifact lookup
 
-- structured multi-perspective evaluation
-- hard-block safety checks
-- deterministic aggregation and replayable outputs
-- board-native artifact persistence for auditing
+## Why this matters
 
-## Core capabilities
+Without a shared core, every guard drifts into incompatible policy logic. This package keeps behavior consistent, replayable, and comparable across domains.
 
-- strict input/output JSON contracts for pipeline integration
-- deterministic policy evaluation where possible
-- idempotent retry behavior to avoid duplicate side effects
-- versioned artifacts written to board ledger history
+## Ecosystem role
 
-## Stack assumptions
+`consensus-guard-core` is consumed by publish/support/merge/action guards and should be treated as policy infrastructure, not an end-user workflow skill.
 
-- built to compose with consensus-interact workflows
-- uses consensus-tools board/job/submission primitives
-- designed to integrate with persona-generator persona_set artifacts
+## Benefits for LLM orchestration
+
+- lower integration drift
+- consistent decision semantics across workflows
+- easier auditing and cross-skill analytics
 
 ## Quick start
 
-Use the repo examples and run script to execute locally.
-
-## Expected outcomes
-
-- a decision/result artifact persisted to board state
-- optional updated persona_set artifact for adaptive governance
-- machine-parseable output suitable for automation systems
+```bash
+npm test
+```
