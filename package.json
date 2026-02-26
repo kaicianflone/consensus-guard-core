@@ -1,0 +1,11 @@
+{
+  "name": "consensus-guard-core",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": { "test": "node --test --import tsx" },
+  "dependencies": {
+    "@consensus-tools/consensus-tools": "file:../consensus-tools",
+    "tsx": "^4.20.3"
+  }
+}
