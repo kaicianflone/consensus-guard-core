@@ -39,6 +39,23 @@ export async function getLatest(boardId, type, statePath) { const i = await hydr
 export async function getPersonaSet(boardId, personaSetId, statePath){ const i = await hydrateIndex(boardId,statePath); return i.persona_by_id[personaSetId] || null; }
 export async function getDecisionByKey(boardId, idem, statePath){ const i = await hydrateIndex(boardId,statePath); return i.idempotency[idem] || null; }
 
+// consensus-interact contract wrappers (single boundary for skill tool calls)
+export async function readBoardPolicy(boardId, statePath) {
+  return getLatest(boardId, 'board_policy', statePath);
+}
+
+export async function getLatestPersonaSet(boardId, statePath) {
+  return getLatest(boardId, 'persona_set', statePath);
+}
+
+export async function getDecisionByIdempotency(boardId, idempotencyKey, statePath) {
+  return getDecisionByKey(boardId, idempotencyKey, statePath);
+}
+
+export async function writeDecision(boardId, payload, statePath) {
+  return writeArtifact(boardId, 'decision', payload, statePath);
+}
+
 export async function writeArtifact(boardId, type, payload, statePath) {
   const { storage, engine } = mk(statePath); await storage.init();
   const job = await engine.postJob('orchestrator@local', { boardId, title:`artifact:${type}`, description:`Artifact write: ${type}`, mode:'SUBMISSION', policyConfigJson:{type:'FIRST_SUBMISSION_WINS'}, reward:0,rewardAmount:0,stakeRequired:0,stakeAmount:0,expiresSeconds:3600 });

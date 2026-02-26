@@ -37,3 +37,13 @@ Without a shared core, every guard drifts into incompatible policy logic. This p
 ```bash
 npm test
 ```
+
+## Tool-call integration
+
+This skill is wired to the consensus-interact contract boundary (via shared consensus-guard-core wrappers where applicable):
+- readBoardPolicy
+- getLatestPersonaSet / getPersonaSet
+- writeArtifact / writeDecision
+- idempotent decision lookup
+
+This keeps board orchestration standardized across skills.

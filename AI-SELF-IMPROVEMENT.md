@@ -43,3 +43,7 @@ Without a shared core, each guard invents incompatible policy logic and learning
 - **State substrate**: consensus-tools artifacts
 - **Primary output**: reusable deterministic policy/idempotency/indexing primitives
 - **Primary benefit**: cross-guard consistency and replayability
+
+## Tool-call boundary
+
+To avoid orchestration drift, this skill routes board operations through the consensus-interact contract surface (directly or via guard-core wrappers). This preserves a single governance interaction model while allowing domain-specific decision logic.
