@@ -3,6 +3,8 @@ name: consensus-guard-core
 description: Shared deterministic guard primitives for the Consensus.Tools skill family: hard-block taxonomy, weighted vote aggregation, reputation updates, idempotency keys, strict schema enforcement, and indexed board artifact access.
 homepage: https://github.com/kaicianflone/consensus-guard-core
 source: https://github.com/kaicianflone/consensus-guard-core
+metadata:
+  {"openclaw": {"requires": {"bins": ["node", "npm", "tsx"]}}}
 ---
 
 # consensus-guard-core
