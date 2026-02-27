@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { detectHardBlockFlags, aggregateVotes, updateReputations, makeIdempotencyKey } from '../src/index.mjs';
+import { detectHardBlockFlags, aggregateVotes, updateReputations, makeIdempotencyKey, resolveStatePath } from '../src/index.mjs';
 
 test('taxonomy detects hard blocks', ()=>{
   const f = detectHardBlockFlags('we guarantee results and share ssn');
@@ -20,4 +20,17 @@ test('reputation clamp', ()=>{
 
 test('idempotency stable', ()=>{
   assert.equal(makeIdempotencyKey({a:1}), makeIdempotencyKey({a:1}));
+});
+
+test('resolveStatePath confines traversal to state root', ()=>{
+  const out = resolveStatePath({ stateRoot: '.consensus-test', statePath: '../../etc/passwd' });
+  const root = new URL('../.consensus-test/', import.meta.url).pathname;
+  assert.equal(out.startsWith(root), true);
+  assert.equal(out.endsWith('.json'), true);
+});
+
+test('resolveStatePath hashes absolute paths under safe root', ()=>{
+  const out = resolveStatePath({ stateRoot: '.consensus-test', statePath: '/tmp/a/b/state.json' });
+  assert.equal(out.includes('/tmp/a/b/state.json'), false);
+  assert.equal(out.includes('/_abs/'), true);
 });
