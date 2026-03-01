@@ -6,7 +6,7 @@
     "test": "node --test --import tsx"
   },
   "dependencies": {
-    "@consensus-tools/consensus-tools": "^0.1.7",
+    "@consensus-tools/consensus-tools": "^0.1.8",
     "tsx": "^4.20.3"
   },
   "license": "MIT",
