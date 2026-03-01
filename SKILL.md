@@ -4,7 +4,7 @@ description: Shared deterministic guard primitives for the Consensus.Tools skill
 homepage: https://github.com/kaicianflone/consensus-guard-core
 source: https://github.com/kaicianflone/consensus-guard-core
 metadata:
-  {"openclaw": {"requires": {"bins": ["node", "tsx"]}}}
+  {"openclaw": {"requires": {"bins": ["node", "tsx"], "env": ["CONSENSUS_STATE_FILE", "CONSENSUS_STATE_ROOT"]}}}
 ---
 
 # consensus-guard-core
@@ -38,16 +38,17 @@ Without a shared core, every guard drifts into incompatible policy logic. This p
 ## Runtime, credentials, and network behavior
 
 - runtime binaries: `node`, `tsx`
-- network calls: none in the guard decision path itself
-- conditional network behavior: if a run needs persona generation and your persona-generator backend uses an external LLM, that backend may perform outbound API calls
-- credentials: `OPENAI_API_KEY` (or equivalent provider key) may be required **only** for persona generation in LLM-backed setups; if `persona_set_id` is provided, guards can run without LLM credentials
-- filesystem writes: board/state artifacts under the configured consensus state path
+- network calls: none in this package's core decision/path helpers
+- credentials: none required by this package
+- environment config read by this package: `CONSENSUS_STATE_FILE`, `CONSENSUS_STATE_ROOT` (for board/state path resolution)
+- filesystem writes: board/state artifacts under the configured consensus state path when callers use write helpers (for example `writeArtifact`)
 
 ## Dependency trust model
 
-- `consensus-guard-core` and `consensus-persona-generator` are first-party consensus packages
+- `consensus-guard-core` is a first-party consensus package
 - versions are semver-pinned in `package.json` for reproducible installs
 - this skill does not request host-wide privileges and does not mutate other skills
+- note: dependency trees should be audited separately by consumers for transitive packages
 
 ## Quick start
 
@@ -71,4 +72,4 @@ This skill exposes a canonical entrypoint:
 
 - `invoke(input, opts?) -> Promise<OutputJson | ErrorJson>`
 
-`invoke()` starts the guard flow, which then executes persona evaluation and consensus-interact-contract board operations (via shared guard-core wrappers where applicable).
+`invoke()` is primitives-only and delegates to a caller-provided handler. It does not perform persona generation or model/provider calls.

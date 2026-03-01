@@ -8,6 +8,12 @@ Deterministic primitives for the Consensus guard ecosystem.
 
 Guard quality collapses when each package re-implements policy logic differently. This core keeps behavior consistent, replayable, and comparable across domains.
 
+## Runtime notes
+
+- No provider/API credentials are required by this package.
+- State-path configuration is read from `CONSENSUS_STATE_FILE` and `CONSENSUS_STATE_ROOT` via `resolveStatePath()`.
+- File writes occur only when callers invoke write helpers (for example `writeArtifact`).
+
 ## Core exports
 
 - `aggregateVotes()` — weighted deterministic aggregation
