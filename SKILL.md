@@ -4,7 +4,7 @@ description: Shared deterministic guard primitives for the Consensus.Tools skill
 homepage: https://github.com/kaicianflone/consensus-guard-core
 source: https://github.com/kaicianflone/consensus-guard-core
 metadata:
-  {"openclaw": {"requires": {"bins": ["node", "tsx"], "env": ["CONSENSUS_STATE_FILE", "CONSENSUS_STATE_ROOT"]}}}
+  {"openclaw": {"requires": {"bins": ["node", "tsx"], "env": ["CONSENSUS_STATE_FILE", "CONSENSUS_STATE_ROOT"]}, "install": [{"id": "npm", "kind": "node", "package": "consensus-guard-core", "label": "Install consensus-guard-core from npm"}]}}
 ---
 
 # consensus-guard-core
