@@ -5,6 +5,21 @@ homepage: https://github.com/kaicianflone/consensus-guard-core
 source: https://github.com/kaicianflone/consensus-guard-core
 upstream:
   consensus-tools: https://github.com/kaicianflone/consensus-tools
+requires:
+  bins:
+    - node
+    - tsx
+  env:
+    - CONSENSUS_STATE_FILE
+    - CONSENSUS_STATE_ROOT
+install:
+  - id: npm
+    kind: node
+    package: consensus-guard-core
+    bins:
+      - node
+      - tsx
+    label: Install consensus-guard-core from npm
 ---
 
 # consensus-guard-core

@@ -26,6 +26,8 @@ Expected behavior in shipped core primitives:
 
 Dependency boundary:
 - depends on `@consensus-tools/consensus-tools` for local storage/engine helpers.
+- current implementation imports internal module paths from that package; this is a maintainability/supply-chain coupling risk.
+- planned hardening: migrate to stable public exports from `@consensus-tools/consensus-tools` once exported API is finalized.
 - consumers should pin and review transitive dependencies as part of supply-chain policy.
 
 ## 3) Env vars and credentials
