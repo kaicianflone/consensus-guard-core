@@ -62,6 +62,16 @@ npm i consensus-guard-core
 npm test
 ```
 
+## Import contract
+
+Use the package root import (stable public API):
+
+```js
+import { aggregateVotes, writeArtifact, resolveStatePath } from 'consensus-guard-core';
+```
+
+Do not import internal paths like `consensus-guard-core/src/index.mjs` in dependent skills.
+
 ## Tool-call integration
 
 This skill is wired to the consensus-interact contract boundary (via shared consensus-guard-core wrappers where applicable):
