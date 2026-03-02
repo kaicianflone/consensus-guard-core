@@ -54,7 +54,6 @@ Without a shared core, every guard drifts into incompatible policy logic. This p
 
 - runtime binaries: `node`, `tsx`
 - network calls: none in this package's core decision/path helpers
-- credentials: none required by this package
 - environment config read by this package: `CONSENSUS_STATE_FILE`, `CONSENSUS_STATE_ROOT` (for board/state path resolution)
 - filesystem writes: board/state artifacts under the configured consensus state path when callers use write helpers (for example `writeArtifact`)
 
